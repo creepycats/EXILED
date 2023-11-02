@@ -10,6 +10,7 @@ namespace Exiled.API.Features.Hazards
     using global::Hazards;
     using PlayerRoles;
     using RelativePositioning;
+    using System;
     using UnityEngine;
 
     using PrismaticCloudHazard = global::Hazards.PrismaticCloud;
@@ -37,7 +38,17 @@ namespace Exiled.API.Features.Hazards
         /// <summary>
         /// Gets or sets the synced position.
         /// </summary>
+        [Obsolete("Use SynchronizedPosition")]
         public RelativePosition SynchronisedPosition
+        {
+            get => SynchronizedPosition;
+            set => SynchronizedPosition = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the synced position.
+        /// </summary>
+        public RelativePosition SynchronizedPosition
         {
             get => Base.SynchronizedPosition;
             set => Base.SynchronizedPosition = value;
