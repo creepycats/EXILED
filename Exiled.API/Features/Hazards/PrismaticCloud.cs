@@ -7,11 +7,11 @@
 
 namespace Exiled.API.Features.Hazards
 {
-    using global::Hazards;
-    using PlayerRoles;
-    using RelativePositioning;
     using System;
-    using UnityEngine;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using RelativePositioning;
 
     using PrismaticCloudHazard = global::Hazards.PrismaticCloud;
 
@@ -34,6 +34,15 @@ namespace Exiled.API.Features.Hazards
         /// Gets the <see cref="PrismaticCloudHazard"/>.
         /// </summary>
         public new PrismaticCloudHazard Base { get; }
+
+        /// <summary>
+        /// Gets or sets a list of players that will be ignored by the prismatic cloud.
+        /// </summary>
+        public IReadOnlyCollection<Player> IgnoredPlayers
+        {
+            get => Base.IgnoredTargets.Select(hub => Player.Get(hub)).ToList();
+            set => Base.IgnoredTargets = value.Select(player => player.ReferenceHub).ToList();
+        }
 
         /// <summary>
         /// Gets or sets the synced position.
