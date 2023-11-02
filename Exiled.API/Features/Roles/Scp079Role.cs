@@ -586,10 +586,11 @@ namespace Exiled.API.Features.Roles
         public void ActivateTesla(bool consumeEnergy = true)
         {
             Scp079Camera cam = CurrentCameraSync.CurrentCamera;
-            RewardManager.MarkRoom(cam.Room);
 
             if (!TeslaGateController.Singleton.TeslaGates.TryGetFirst(x => RoomIdUtils.IsTheSameRoom(cam.Position, x.transform.position), out var teslaGate))
                 return;
+
+            RewardManager.MarkRoom(cam.Room);
 
             if (consumeEnergy)
                 AuxManager.CurrentAux -= TeslaAbility._cost;
